@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Noticias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="contenedor-principal">
+    <ion-segment [(ngModel)]="category" (ionChange)="loadNews()">
+      <ion-segment-button value="technology">
+        Tecnología
+      </ion-segment-button>
+      <ion-segment-button value="sports">
+        Deportes
+      </ion-segment-button>
+      <ion-segment-button value="health">
+        Salud
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-card *ngFor="let news of articles; let i = index">
+      <img [src]="news.urlToImage" alt="news.title" [routerLink]="['/', category, i]" />
+      <ion-card-header>
+        <ion-card-title>{{ news.title }}</ion-card-title>
+        <ion-card-subtitle>{{ news.author }} - {{ news.publishedAt | date: 'short' }}</ion-card-subtitle>
+
+        <ion-button expand="full" [routerLink]="['/', category, i]">
+          Leer más
+        </ion-button>
+      </ion-card-header>
+
+      <ion-card-content>
+        {{ news.description }}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
+
